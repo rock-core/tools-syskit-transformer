@@ -61,7 +61,7 @@ module Syskit::Transformer
 
         # Add some transformer configuration to the current configuration
         #
-        # @param [Transformer::Configuration] the new configuration
+        # @param [Transformer::Configuration] transforms the new configuration
         def use_transforms(transforms)
             transformer.merge(transforms)
             self

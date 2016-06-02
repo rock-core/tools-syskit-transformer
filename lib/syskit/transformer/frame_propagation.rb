@@ -327,11 +327,11 @@ module Syskit::Transformer
         # and/or transform-to-port information to be set properly on the task
         # model. For ports that do not have this information, the frame
         # configuration stored in the device model is propagated during the
-        # frame propagation pass by {propagate_device_information}
+        # frame propagation pass by {#propagate_device_information}
         #
         # @param [TaskContext] task
         # @param [DeviceInstance] dev
-        # @returns [Hash<String,String>] the frame mappings, from a task local
+        # @return [Hash<String,String>] the frame mappings, from a task local
         #   frame to a global frame name
         def self.initial_frame_selection_from_device(task, dev)
             tr = task.model.transformer

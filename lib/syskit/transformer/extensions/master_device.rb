@@ -17,12 +17,12 @@ module Syskit::Transformer
         # @overload transformer { }
         #   Provides transformer configuration specific to this device
         #
-        #   @returns [self]
+        #   @return [self]
         #
         # @overload transformer
         #   Returns the transformer configuration specific to this device
         #
-        #   @returns [Transformer::Configuration]
+        #   @return [Transformer::Configuration]
         def transformer(&block)
             if block_given?
                 requirements.transformer(&block)
