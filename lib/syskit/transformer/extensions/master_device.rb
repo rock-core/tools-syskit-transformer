@@ -11,5 +11,25 @@ module Syskit::Transformer
             requirements.use_frames(frame_mappings)
             self
         end
+
+        # Device-level transformer configuration
+        #
+        # @overload transformer { }
+        #   Provides transformer configuration specific to this device
+        #
+        #   @returns [self]
+        #
+        # @overload transformer
+        #   Returns the transformer configuration specific to this device
+        #
+        #   @returns [Transformer::Configuration]
+        def transformer(&block)
+            if block_given?
+                requirements.transformer(&block)
+                self
+            else
+                requirements.transformer
+            end
+        end
     end
 end

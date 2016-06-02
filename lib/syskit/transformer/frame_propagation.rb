@@ -443,12 +443,15 @@ module Syskit::Transformer
         end
 
         def self.initialize_transform_producers(task, current_selection)
-            new_info =
-                if task.requirements
-                    current_selection.dup.merge(task.requirements.transformer)
-                else
-                    current_selection.dup
+            new_info = current_selection.dup
+            if task.respond_to?(:each_master_device)
+                task.each_master_device do |dev|
+                    new_info.merge(dev.transformer)
                 end
+            end
+            if task.requirements
+                new_info.merge(task.requirements.transformer)
+            end
             task.transformer.merge(new_info)
         end
     end
