@@ -2,6 +2,9 @@ module Syskit::Transformer
     # Implementation of an algorithm that propagates the frame information along
     # the dataflow network, and makes sure that frame selections are consistent.
     class FramePropagation < Syskit::NetworkGeneration::DataFlowComputation
+        include Logger::Hierarchy
+        extend Logger::Hierarchy
+
         class FrameAnnotation
             attr_reader :task
             attr_reader :frame_name
@@ -153,8 +156,8 @@ module Syskit::Transformer
                     if selected_transform && Transformer.transform_port?(out_port)
                         from, to = selected_transform.from, selected_transform.to
                         if !tr || !tr.find_transform_of_port(out_port.name)
-                            Transformer.debug do
-                                Transformer.debug "directly associating transform #{from} => #{to} to port #{out_port} using information from device #{dev.full_name} driven by #{srv.name}"
+                            debug do
+                                debug "directly associating transform #{from} => #{to} to port #{out_port} using information from device #{dev.full_name} driven by #{srv.name}"
                                 break
                             end
                             add_port_info(task, out_port.name,
@@ -163,8 +166,8 @@ module Syskit::Transformer
                         end
                     elsif selected_frame
                         if !tr || !tr.find_frame_of_port(out_port.name)
-                            Transformer.debug do
-                                Transformer.debug "directly associating frame #{selected_frame} to port #{out_port} using information from device #{dev.full_name} driven by #{srv.name}"
+                            debug do
+                                debug "directly associating frame #{selected_frame} to port #{out_port} using information from device #{dev.full_name} driven by #{srv.name}"
                                 break
                             end
                             add_port_info(task, out_port.name,
@@ -212,14 +215,14 @@ module Syskit::Transformer
                 end
             end
 
-            Transformer.debug do
-                Transformer.debug "initially selected frames for #{task}"
+            debug do
+                debug "initially selected frames for #{task}"
                 available_frames = task.model.transformer.available_frames.dup
                 task.selected_frames.each do |frame_name, selected_frame|
-                    Transformer.debug "  selected #{selected_frame} for #{frame_name}"
+                    debug "  selected #{selected_frame} for #{frame_name}"
                     available_frames.delete(frame_name)
                 end
-                Transformer.debug "  #{available_frames.size} frames left to pick: #{available_frames.to_a.sort.join(", ")}"
+                debug "  #{available_frames.size} frames left to pick: #{available_frames.to_a.sort.join(", ")}"
                 break
             end
         end
@@ -355,17 +358,17 @@ module Syskit::Transformer
                         from, to = selected_transform.from, selected_transform.to
                         if transform = tr.find_transform_of_port(out_port.name)
                             if from
-                                Transformer.debug { "selecting #{from} for #{transform.from} on #{task}, using information from device #{dev}" }
+                                debug { "selecting #{from} for #{transform.from} on #{task}, using information from device #{dev}" }
                                 new_selections[transform.from] = from
                             end
                             if to
-                                Transformer.debug { "selecting #{to} for #{transform.to} on #{task}, using information from device #{dev}" }
+                                debug { "selecting #{to} for #{transform.to} on #{task}, using information from device #{dev}" }
                                 new_selections[transform.to] = to
                             end
                         end
                     elsif selected_frame
                         if frame_name = tr.find_frame_of_port(out_port.name)
-                            Transformer.debug { "selecting #{selected_frame} for #{frame_name} on #{task}, using information from device #{dev}" }
+                            debug { "selecting #{selected_frame} for #{frame_name} on #{task}, using information from device #{dev}" }
                             new_selections[frame_name] = selected_frame
                         end
                     end

@@ -1,5 +1,7 @@
 module Syskit::Transformer
     module Plugin
+        extend Logger::Hierarchy
+
         def self.compute_required_transformations(manager, task)
             static_transforms  = Hash.new
             dynamic_transforms = Hash.new { |h, k| h[k] = Array.new }
@@ -40,9 +42,9 @@ module Syskit::Transformer
                     end
                 end
 
-                Transformer.debug do
-                    Transformer.debug "looking for chain for #{from} => #{to} in #{task}"
-                    Transformer.debug "  with local producers: #{self_producers}"
+                debug do
+                    debug "looking for chain for #{from} => #{to} in #{task}"
+                    debug "  with local producers: #{self_producers}"
                     break
                 end
                 chain =
@@ -52,12 +54,12 @@ module Syskit::Transformer
                         raise InvalidChain.new(manager, task, trsf.from, from, trsf.to, to, e),
                             "cannot find a transformation chain to produce #{from} => #{to} for #{task} (task-local frames: #{trsf.from} => #{trsf.to}): #{e.message}", e.backtrace
                     end
-                Transformer.log_pp(:debug, chain)
+                log_pp(:debug, chain)
 
                 static, dynamic = chain.partition
-                Transformer.debug do
-                    Transformer.debug "#{static.to_a.size} static transformations"
-                    Transformer.debug "#{dynamic.to_a.size} dynamic transformations"
+                debug do
+                    debug "#{static.to_a.size} static transformations"
+                    debug "#{dynamic.to_a.size} dynamic transformations"
                     break
                 end
 
@@ -89,9 +91,9 @@ module Syskit::Transformer
             producer_task.transformer.merge(manager.conf)
             propagate_local_transformer_configuration(producer_task)
 
-            Transformer.debug { "instanciated #{producer_task} for #{task}" }
+            debug { "instanciated #{producer_task} for #{task}" }
             transformations.each do |dyn|
-                Transformer.debug { "adding #{producer_task} as child transformer_#{dyn.from}2#{dyn.to} of #{task}" }
+                debug { "adding #{producer_task} as child transformer_#{dyn.from}2#{dyn.to} of #{task}" }
                 task.depends_on(producer_task, :role => "transformer_#{dyn.from}2#{dyn.to}")
 
                 out_port = producer.find_port_for_transform(dyn.from, dyn.to)
@@ -145,7 +147,7 @@ module Syskit::Transformer
                 tr_config = task.transformer
                 tr_manager = Transformer::TransformationManager.new(tr_config)
 
-                Transformer.debug { "computing needed static and dynamic transformations for #{task}" }
+                debug { "computing needed static and dynamic transformations for #{task}" }
 
                 static_transforms, dynamic_transforms = compute_required_transformations(tr_manager, task)
                 task.static_transforms = static_transforms.values
