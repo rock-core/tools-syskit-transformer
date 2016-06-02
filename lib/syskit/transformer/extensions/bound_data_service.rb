@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     module BoundDataServiceExtension
         include ConcreteComponentExtension
 

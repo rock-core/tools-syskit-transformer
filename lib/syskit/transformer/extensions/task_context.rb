@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     # Module that extends the TaskContext class itself
     module TaskContextExtension
         include ConcreteComponentExtension
@@ -38,7 +38,7 @@ module Transformer
             if associated_transform = model.find_transform_of_port(port)
                 from = selected_frames[associated_transform.from]
                 to   = selected_frames[associated_transform.to]
-                Transform.new(from, to)
+                Transformer::Transform.new(from, to)
             end
         end
 

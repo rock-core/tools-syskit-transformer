@@ -1,8 +1,9 @@
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'syskit/test/self'
-require 'transformer/syskit'
+require 'syskit/transformer'
 
-module Transformer
-    module SyskitPlugin
+module Syskit::Transformer
+    module Plugin
         module SelfTest
             def setup
                 super
@@ -14,5 +15,3 @@ module Transformer
         Minitest::Test.include SelfTest
     end
 end
-
-

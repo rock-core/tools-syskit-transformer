@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     # Extension to Syskit::Port
     module PortExtension
         # Returns a transformation object that represents the transformation

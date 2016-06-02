@@ -1,7 +1,7 @@
 require 'rgl/traversal'
-require 'transformer/syskit/configuration'
-require 'transformer/syskit/exceptions'
-require 'transformer/syskit/extensions'
-require 'transformer/syskit/frame_propagation'
-require 'transformer/syskit/plugin'
+require 'syskit/transformer/configuration'
+require 'syskit/transformer/exceptions'
+require 'syskit/transformer/extensions'
+require 'syskit/transformer/frame_propagation'
+require 'syskit/transformer/plugin'
 

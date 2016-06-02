@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     module PlanExtension
         attribute(:transformer_configuration_state) do
             [Time.now, Types.transformer.ConfigurationState.new]
@@ -12,5 +12,3 @@ module Transformer
         end
     end
 end
-
-

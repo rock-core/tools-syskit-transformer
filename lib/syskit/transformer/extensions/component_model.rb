@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     # Extensions to the Component class
     module ComponentModelExtension
         # This returns an InstanciatedComponent object that can be used in
@@ -41,7 +41,7 @@ module Transformer
         # the frame name
         #
         # @yieldparam [Syskit::Models::Port] the port
-        # @yieldparam [Transform] the associated transformation. This uses
+        # @yieldparam [Transformer::Transform] the associated transformation. This uses
         #   task-local names.
         def each_transform_port
             return if !(trsf = transformer)
@@ -51,4 +51,3 @@ module Transformer
         end
     end
 end
-

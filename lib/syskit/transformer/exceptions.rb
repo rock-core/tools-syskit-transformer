@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     # Exception raised when a frame is being selected with #selected_frame, but
     # the selection is invalid
     #
@@ -247,6 +247,4 @@ module Transformer
 
     # Exception raised when a producer requires itself to function
     class RecursiveProducer < RuntimeError; end
-
 end
-

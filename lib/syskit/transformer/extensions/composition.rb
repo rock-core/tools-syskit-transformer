@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     module CompositionExtension
         # Returns an output port object that is providing the requested
         # transformation, or nil if none can be found
@@ -81,15 +81,14 @@ module Transformer
                 source_task.select_port_for_transform(source_task.find_port(source_port), from, to)
                 return
             end
-	    nil
+            nil
         end
 
         def find_transform_of_port(port)
             self.each_concrete_input_connection(port) do |source_task, source_port, sink_port, policy|
                 return source_task.find_transform_of_port(source_task.find_port(source_port))
             end
-	    nil
+            nil
         end
     end
 end
-

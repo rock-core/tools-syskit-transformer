@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     # Module mixed-in in component models that are represented as orogen
     # interfaecs
     module ConcreteComponentExtension

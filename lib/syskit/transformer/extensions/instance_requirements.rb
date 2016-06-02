@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     # Module used to extend the instance specification objects with the ability
     # to map frame names to global frame names
     #
@@ -14,7 +14,7 @@ module Transformer
         attr_writer :transformer
 
         def transformer
-            @transformer ||= SyskitConfiguration.new
+            @transformer ||= Configuration.new
             if block_given?
                 @transformer.instance_eval(&proc)
                 return self
@@ -88,5 +88,4 @@ module Transformer
         end
     end
 end
-
 

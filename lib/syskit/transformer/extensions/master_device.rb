@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     # Module used to extend the device specification objects with the ability
     # to specify frames
     #

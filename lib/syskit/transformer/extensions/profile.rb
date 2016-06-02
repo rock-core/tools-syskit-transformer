@@ -1,11 +1,11 @@
-module Transformer
+module Syskit::Transformer
     # Extension to syskit profiles
     #
     # It gives access to the transformer configuration
     module ProfileExtension
         # This is a normal transformer configuration with only a few added
         # tweaks
-        class Configuration < SyskitConfiguration
+        class Configuration < Syskit::Transformer::Configuration
             attr_accessor :profile
             def initialize(profile)
                 @profile = profile

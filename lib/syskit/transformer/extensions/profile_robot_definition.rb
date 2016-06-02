@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     module ProfileRobotDefinitionExtension
         def inject_di_context(requirements)
             requirements.transformer.merge(profile.transformer)

@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     # Module that extends the TaskContext class itself
     module TaskContextModelExtension
         def each_transform_input

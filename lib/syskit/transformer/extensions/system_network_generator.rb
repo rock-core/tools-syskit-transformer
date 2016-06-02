@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     # Module used to add some functionality to Syskit::NetworkGeneration::Engine
     module SystemNetworkGeneratorExtension
         # During network validation, checks that all required frames have been

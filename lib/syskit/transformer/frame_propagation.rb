@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     # Implementation of an algorithm that propagates the frame information along
     # the dataflow network, and makes sure that frame selections are consistent.
     class FramePropagation < Syskit::NetworkGeneration::DataFlowComputation
@@ -429,7 +429,7 @@ module Transformer
                     debug { "adding frame selection from #{task}: #{new_selections}" }
                     new_selections.each do |frame_name, selected_frame|
                         if !task.transformer.has_frame?(selected_frame)
-                            raise InvalidConfiguration, "undefined frame #{selected_frame} selected for '#{frame_name}' in #{task}"
+                            raise Transformer::InvalidConfiguration, "undefined frame #{selected_frame} selected for '#{frame_name}' in #{task}"
                         end
                     end
                     new_selections
@@ -450,4 +450,3 @@ module Transformer
         end
     end
 end
-

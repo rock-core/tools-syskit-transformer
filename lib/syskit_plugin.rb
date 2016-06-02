@@ -1,2 +1,2 @@
-require 'transformer/syskit'
-Transformer::SyskitPlugin.register
+require 'syskit/transformer'
+Syskit::Transformer::Plugin.register

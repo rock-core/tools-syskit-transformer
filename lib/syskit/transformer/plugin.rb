@@ -1,5 +1,5 @@
-module Transformer
-    module SyskitPlugin
+module Syskit::Transformer
+    module Plugin
         def self.compute_required_transformations(manager, task)
             static_transforms  = Hash.new
             dynamic_transforms = Hash.new { |h, k| h[k] = Array.new }
@@ -294,11 +294,11 @@ module Transformer
 
             # Maintain a transformer broadcaster on the main engine
             Roby::ExecutionEngine.add_propagation_handler(description: 'syskit-transformer transformer broadcaster start') do |plan|
-		if Syskit.conf.transformer_broadcaster_enabled?
-		    if !plan.execution_engine.quitting? && plan.find_tasks(OroGen::Transformer::Task).not_finished.empty?
-			plan.add_mission_task(OroGen::Transformer::Task)
-		    end
-		end
+                if Syskit.conf.transformer_broadcaster_enabled?
+                    if !plan.execution_engine.quitting? && plan.find_tasks(OroGen::Transformer::Task).not_finished.empty?
+                        plan.add_mission_task(OroGen::Transformer::Task)
+                    end
+                end
             end
 
             Syskit::NetworkGeneration::Engine.register_instanciation_postprocessing do |engine, plan|
@@ -320,55 +320,55 @@ module Transformer
             end
 
             Syskit::Component.class_eval do
-                prepend Transformer::ComponentExtension
-                extend Transformer::ComponentModelExtension
+                prepend ComponentExtension
+                extend ComponentModelExtension
             end
             Syskit::TaskContext.class_eval do
-                prepend Transformer::TaskContextExtension
-                extend Transformer::TaskContextModelExtension
+                prepend TaskContextExtension
+                extend TaskContextModelExtension
             end
             Syskit::Port.class_eval do
-                prepend Transformer::PortExtension
+                prepend PortExtension
             end
             Syskit::Composition.class_eval do
-                prepend Transformer::CompositionExtension
+                prepend CompositionExtension
             end
             Syskit::BoundDataService.class_eval do
-                prepend Transformer::BoundDataServiceExtension
+                prepend BoundDataServiceExtension
             end
             Roby::Plan.class_eval do
-                prepend Transformer::PlanExtension
+                prepend PlanExtension
             end
 
             Syskit::Robot::DeviceInstance.class_eval do
-                prepend Transformer::DeviceExtension
+                prepend DeviceExtension
             end
             Syskit::Robot::MasterDeviceInstance.class_eval do
-                prepend Transformer::MasterDeviceExtension
+                prepend MasterDeviceExtension
             end
             Syskit::Graphviz.class_eval do
-                prepend Transformer::GraphvizExtension
+                prepend GraphvizExtension
             end
             Syskit::Graphviz.available_task_annotations << 'transforms'
             Syskit::InstanceRequirements.class_eval do
-                prepend Transformer::InstanceRequirementsExtension
+                prepend InstanceRequirementsExtension
             end
             Syskit::NetworkGeneration::SystemNetworkGenerator.class_eval do
-                prepend Transformer::SystemNetworkGeneratorExtension
+                prepend SystemNetworkGeneratorExtension
             end
             Syskit::Actions::Profile.class_eval do
-                prepend Transformer::ProfileExtension
+                prepend ProfileExtension
             end
             Syskit::Actions::Profile::RobotDefinition.class_eval do
-                prepend Transformer::ProfileRobotDefinitionExtension
+                prepend ProfileRobotDefinitionExtension
             end
         end
 
         def self.register
             Syskit::RobyApp::Configuration.class_eval do
-                prepend Transformer::ConfigurationExtension
+                prepend ConfigurationExtension
             end
-            Syskit::TaskContext.extend Transformer::TransformerConfigurationAccess
+            Syskit::TaskContext.extend TransformerConfigurationAccess
             Roby.app.filter_out_patterns.push(/^#{Regexp.quote(__FILE__)}/)
         end
     end

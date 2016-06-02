@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     # Module used to extend objects of the class Syskit::Component
     module ComponentExtension
         attribute(:selected_frames) { Hash.new }
@@ -77,7 +77,7 @@ module Transformer
         # the frame name
         #
         # @yieldparam [Syskit::Port] the port
-        # @yieldparam [Transform] the associated transformation. This uses
+        # @yieldparam [Transformer::Transform] the associated transformation. This uses
         #   global names, not task-local ones. 'from', 'to' or both can be nil if
         #   some of the frames are not yet assigned at the task level
         def each_transform_port
@@ -85,7 +85,7 @@ module Transformer
             model.each_transform_port do |port, transform|
                 from = selected_frames[transform.from]
                 to   = selected_frames[transform.to]
-                yield port.bind(self), Transform.new(from, to)
+                yield port.bind(self), Transformer::Transform.new(from, to)
             end
         end
 
@@ -96,4 +96,3 @@ module Transformer
         end
     end
 end
-

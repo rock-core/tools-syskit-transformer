@@ -1,4 +1,4 @@
-module Transformer
+module Syskit::Transformer
     # Module used to add the 'transforms' annotations to the graph output
     module GraphvizExtension
         def frame_transform_id(task, from, to, prefix= "")
