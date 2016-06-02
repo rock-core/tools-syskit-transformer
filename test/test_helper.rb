@@ -23,6 +23,7 @@ module Syskit::Transformer
             def setup
                 super
                 Orocos.export_types = true
+                Roby.app.using 'syskit-transformer'
                 Syskit.conf.transformer_warn_about_unset_frames = false
                 Syskit.conf.transformer_enabled = true
             end
