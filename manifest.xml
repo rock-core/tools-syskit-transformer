@@ -1,0 +1,19 @@
+<package>
+    <description brief="Modelling of frames and transformations in a Syskit network">
+        This plugin adds the ability for Syskit to annotate the data streams
+        with frames and/or transformations, thus checking consistency in the
+        network. Moreover, it allows to autoconfigure oroGen components that use
+        Rock's transformer based on the computed information
+    </description>
+    <maintainer>Sylvain Joyeux/sylvain.joyeux@m4x.org</maintainer>
+    <copyright>
+        DFKI/robotik@dfki.de
+        BIR/bir.sylvain@gmail.com
+    </copyright>
+    <license>LGPL v2 or later</license>
+
+    <depend package="tools/syskit"/>
+    <depend package="drivers/transformer"/>
+    <tags>stable</tags>
+</package>
+
